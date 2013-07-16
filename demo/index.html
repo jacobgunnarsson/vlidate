@@ -6,28 +6,40 @@
 
         <title>vlidate demo</title>
 
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="../src/jquery.vlidate.js"></script>
         <script>
         $(function() {
-            $('#form1').vlidate({ regex: { ass: 'ass' } });
+            $('form').vlidate({ highlight: true, regex: { testRegex: /test/ } }, function(results) {
+                console.log(results);
+                $('section span').hide();
+
+                (results.status === 'passed') ? $('.passed').show() : $('.failed').show();
+            });
         });
         </script>
     </head>
     <body>
-        <form id="form1">
+        <form>
             <fieldset>
                 <input data-validate="name" type="text" placeholder="Full name" />
                 <input data-validate="email" type="text" placeholder="Email" />
                 <input data-validate="password" type="password" placeholder="Password" />
                 <select data-validate="required">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                    <option></option>
+                    <option>Testvalue 1</option>
+                    <option>Testvalue 2</option>
+                    <option>Testvalue 3</option>
                 </select>
-                <input id="checkbox1" type="checkbox" data-validate="required" />
+                <input data-validate="required" id="checkbox1" type="checkbox" />
+                <textarea data-validate="text" rows="3" cols="40" placeholder="Textarea test"></textarea>
                 <button type="submit">Submit</button>
             </fieldset>
         </form>
+        <section>
+            Result: <span class="passed">Passed</span><span class="failed">Failed</span><br/>
+        </section>
     </body>
 </html>

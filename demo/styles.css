@@ -1,0 +1,18 @@
+body { font-family: Arial, Helvetica, sans-serif; }
+
+form * { display: block; margin: 10px 10px 10px 0; }
+fieldset { border: none; }
+section { margin: 10px; }
+
+.vlidate-failed { background-color: #ff9696; }
+.vlidate-failed[type="checkbox"] { border: 1px solid red; }
+.vlidate-passed { background-color: #b8d984; }
+
+section span { display: none; }
+.passed { color: #b8d984; }
+.failed { color: #ff9696; }
+
+::-webkit-input-placeholder { color: #000; }
+:-moz-placeholder { color: #000; }
+::-moz-placeholder { color: #000; }
+:-ms-input-placeholder { color: #000; }
