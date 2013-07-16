@@ -22,7 +22,7 @@
 			};
 
 		/*
-		* 	Ou	r inputs to validate
+		*	Our inputs to validate
 		*/
 		var inputs = $('input, select, textarea', this);
 
@@ -52,23 +52,25 @@
 			},
 
 			/*
-			* 	Iterate over inputs and validate based on data-validate attribute
+			*	Iterate over inputs and validate based on data-validate attribute
 			*/
 			validate: {
+
 				input: function(el) {
 					var $this		= $(k),
 						inputVal	= $this.val(),
 						validation	= $this.data('validate');
-
 				}
+
 			},
 
 			submit: function() {
-				for (var i = 0; i < results.length; ++i) {
+
+				for (var i = 0; i < results.length; ++i)
 					if (!results[i]) return false;
-				}
 
 				return true;
+
 			}
 		};
 
