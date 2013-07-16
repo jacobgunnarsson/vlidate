@@ -1,6 +1,6 @@
 ;(function($, window, document, undefined) {
 
-	$.fn.vlidate = function(plugins, options) {
+	$.fn.vlidate = function(plugins, options, callback) {
 		form = this;
 
 		var defaults = {};
@@ -8,7 +8,7 @@
 		/*
 		*	Object containing validation regex for supported inputs
 		*/
-		var	regex = {
+		var regex = {
 				name: /^[a-zA-Z ]+$/,
 				email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 				password: /(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*/,
@@ -22,7 +22,7 @@
 			};
 
 		/*
-		* 	Our inputs to validate
+		* 	Ou	r inputs to validate
 		*/
 		var inputs = $('input, select, textarea', this);
 
@@ -79,7 +79,7 @@
 		/*
 		*	Return this to maintain jQuery chainability
 		*/
-		return false;
+		return this;
 	};
 
 })(jQuery, window, document);
