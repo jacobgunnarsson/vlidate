@@ -1,13 +1,12 @@
-(function($) {
+;(function($, window, document, undefined) {
 
-	$.fn.vlidate = function() {
-		/* 
-		* @desc array containing validation results 
-		*/
-		var validations = [];
+	$.fn.vlidate = function(plugins, options) {
+		form = this;
 
-		/* 
-		* @desc object containing validation regex for supported inputs 
+		var defaults = {};
+
+		/*
+		*	Object containing validation regex for supported inputs
 		*/
 		var	regex = {
 				name: /^[a-zA-Z ]+$/,
@@ -22,29 +21,65 @@
 				numeric: /^[0-9]+$/
 			};
 
-		/* 
-		* @desc $ object containing inputs to validate
+		/*
+		* 	Our inputs to validate
 		*/
 		var inputs = $('input, select, textarea', this);
 
-		/*
-		* @desc iterate over inputs and validate based on data-validate attr
-		* @return bool
-		*/
-		inputs.each(function(v, k) {
+		var methods = {
 
-		});
+			/*
+			*	Init event handler
+			*/
+			init: function() {
+				form.on('submit', function() {
 
-		/* @desc on submit event loop trough array containing validation results  
-		 * @return bool
-		 */
-		this.on('submit', function() {
-			for (var i = 0; i < validations.length; ++i) {
-				if (!validations[i]) return false;
+					inputs.each(function(v, el) {
+
+						switch (el.tagName) {
+							case 'input':
+								this.validate.input(el);
+								break;
+							case 'select':
+								this.validate.select(el);
+								break;
+							case 'textarea':
+								this.valdate.textarea(el);
+								break;
+						}
+					});
+				});
+			},
+
+			/*
+			* 	Iterate over inputs and validate based on data-validate attribute
+			*/
+			validate: {
+				input: function(el) {
+					var $this		= $(k),
+						inputVal	= $this.val(),
+						validation	= $this.data('validate');
+
+				}
+			},
+
+			submit: function() {
+				for (var i = 0; i < results.length; ++i) {
+					if (!results[i]) return false;
+				}
+
+				return true;
 			}
+		};
 
-			return true;
-		});
+		$.extend(defaults, options);
+
+		methods.init();
+
+		/*
+		*	Return this to maintain jQuery chainability
+		*/
+		return false;
 	};
 
-})(jQuery);
+})(jQuery, window, document);

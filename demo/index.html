@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>vlidate demo</title>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="../js/jquery.vlidate.js"></script>
+        <script>
+        $(function() {
+            $('#form1').vlidate();
+        });
+        </script>
+    </head>
+    <body>
+        <form id="form1">
+            <fieldset>
+                <input data-validate="name" type="text" placeholder="Full name" />
+                <input data-validate="email" type="text" placeholder="Email" />
+                <input data-validate="password" type="password" placeholder="Password" />
+                <select data-validate="required">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <input id="checkbox1" type="checkbox" />
+                <button type="submit">Submit</button>
+            </fieldset>
+        </form>
+
+        <form id="form2">
+            <fieldset>
+                <input data-validate="name" type="text" placeholder="Full name" />
+                <input data-validate="email" type="text" placeholder="Email" />
+                <input data-validate="password" type="password" placeholder="Password" />
+                <select data-validate="required">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <input type="checkbox" />
+                <button type="submit">Submit</button>
+            </fieldset>
+        </form>
+
+
+    </body>
+</html>
