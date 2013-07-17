@@ -13,7 +13,7 @@ Simply call .vlidate() on your form element, i.e.
 ```
 $('form').vlidate(options, function(results) { ... });
 ```
-Where options is an object, read more under the next section, 'Options'. The callback is optional, if no callback is provided it is assumed you want the form to submit as usual, the first argument passed into the callback are the validation results.
+Where options is an object, read more under the next section, 'Options'. The callback is optional, if no callback is provided it is assumed you want the form to submit as usual. If a callback is provided, the first argument passed into the callback are the validation results.
 
 
 ### Options
