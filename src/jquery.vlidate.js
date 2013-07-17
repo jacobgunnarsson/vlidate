@@ -4,7 +4,7 @@
 		var form = this;
 
         /*
-        *   The default settings and validation regex for supported inputs
+        *   Default plugin settings and validation regex for supported inputs
         */
 		var defaults = {
 
@@ -34,12 +34,17 @@
         };
 
         /*
-        *   Extend regex if user wants to add their own validation
+        *   Extend defaults with options passed by the user
         */
         $.extend(true, defaults, options);
 
+        /*
+        *   If no callback is provided, assume user wants the form submitted as usual
+        */
+        if (typeof callback === 'undefined') defaults.preventFormSubmit = false;
+
 		/*
-		*	Our inputs to validate and regex to cache regex patterns
+		*	Inputs to validate, cache of regex patterns and the results object
 		*/
 		var inputs = $('input, select, textarea', form);
 
@@ -63,22 +68,26 @@
             if (defaults.preventFormSubmit || results.status !== 'passed') event.preventDefault();
 
             /*
-            *   Results to store validation results
+            *   Reset results object for this submission
             */
             results = { status: '', failed: [], passed: [] };
 
             /*
-            *   Iterate over inputs with validate data-attribute and use validation method based on tagName
+            *   Iterate over inputs with data-validate attribute and pass it to the appropriate validation method based on tagName
             */
 			inputs.each(function(v, el) {
+
                 var $this       = $(el),
                     inputVal    = $this.val(),
+                    validation  = $this.data('validate'),
                     isCheckbox  = ($this.attr('type') === 'checkbox'),
-                    isSelect    = ($this.prop('tagName') === 'SELECT'),
-                    validation  = $this.data('validate');
+                    isSelect    = ($this.prop('tagName') === 'SELECT');
 
                 if (validation) {
 
+                    /*
+                    *   Do a quick check to see if the requested validation passed in the data-validate tag exists as a regex pattern, if not, throw and error
+                    */
                     if (typeof regex[validation] === 'undefined' && !isCheckbox && !isSelect) methods.error('Invalid data-validate attribute');
 
                     switch (el.tagName) {
@@ -98,7 +107,7 @@
 			});
 
             /*
-            *   Highlight results, submit form and call callback
+            *   Highlight results and handle form submission/callback
             */
             if (defaults.highlight) methods.highlight();
 
@@ -199,13 +208,13 @@
 
             },
 
-            /*
-            *   Return results with the callback provided
-            */
             submit: function() {
 
                 results.status = (results.failed.length) ? 'failed' : 'passed';
 
+                /*
+                *   Based on the set plugin options either submit the form or, the default behavior, pass the results objects to the callback
+                */
                 if (!defaults.preventFormSubmit && results.status === 'passed') {
 
                     form.submit();
@@ -214,7 +223,7 @@
 
                     callback(results);
 
-                } else { this.error('No callback provided'); }
+                } else { this.error('No callback provided or callback is not a function'); }
 
             },
 
